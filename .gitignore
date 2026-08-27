@@ -1,0 +1,18 @@
+# Build output
+dist/
+*.zip
+
+# Editor / OS noise
+.vscode/
+.idea/
+Thumbs.db
+desktop.ini
+*.swp
+
+# Never commit anything pulled off the live server
+world/
+*.dat
+*.dat_old
+usercache.json
+ops.json
+whitelist.json

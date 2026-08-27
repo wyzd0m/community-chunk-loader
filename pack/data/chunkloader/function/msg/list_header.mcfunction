@@ -1,0 +1,1 @@
+tellraw @s [{"text":"[ChunkLoader] ","color":"aqua"},{"text":"Your chunks: ","color":"white"},{"score":{"name":"#used","objective":"cl.tmp"},"color":"yellow"},{"text":" / ","color":"white"},{"score":{"name":"#max_chunks","objective":"cl.cfg"},"color":"yellow"},{"text":" slots used","color":"white"}]
