@@ -1,0 +1,34 @@
+name: verify
+
+# Runs the structural checks that catch the datapack mistakes Minecraft reports
+# as nothing at all: a dangling function reference, a macro line missing its
+# leading '$', the 1.20-style plural "functions/" directory. A pack with any of
+# those loads without complaint and simply never works.
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Run structural checks
+        run: bash tools/verify.sh
+
+      - name: Build the datapack zip
+        run: |
+          cd pack
+          zip -r "../community-chunk-loader-${GITHUB_SHA::7}.zip" . -x '.*'
+
+      - name: Upload the built pack
+        uses: actions/upload-artifact@v4
+        with:
+          name: community-chunk-loader
+          path: community-chunk-loader-*.zip
+          if-no-files-found: error

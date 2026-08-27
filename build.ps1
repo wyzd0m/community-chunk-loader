@@ -21,7 +21,10 @@ if (-not (Test-Path $src)) { throw "Source folder not found: $src" }
 $mcmetaPath = Join-Path $src "pack.mcmeta"
 $mcmeta     = Get-Content $mcmetaPath -Raw | ConvertFrom-Json
 $mcmeta.pack.description = "Community Chunk Loader v$Version - per-player persistent chunk loading"
-$mcmeta | ConvertTo-Json -Depth 10 | Set-Content $mcmetaPath -Encoding UTF8
+# WriteAllText rather than Set-Content: Set-Content emits CRLF and a BOM, and
+# the repo pins pack files to LF. tools/verify.sh fails the build otherwise.
+$json = ($mcmeta | ConvertTo-Json -Depth 10) -replace "`r`n", "`n"
+[System.IO.File]::WriteAllText($mcmetaPath, $json + "`n", (New-Object System.Text.UTF8Encoding($false)))
 
 $outPath = Join-Path $root $OutDir
 if (-not (Test-Path $outPath)) { New-Item -ItemType Directory -Path $outPath | Out-Null }

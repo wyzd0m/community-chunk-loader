@@ -21,3 +21,19 @@ for what still has to pass before this is tagged.
   `clear_player`, `clear_all`, `panic`, `set_limit`, `set_dimensions`,
   `enable_new_claims`, `disable_new_claims`.
 - `build.ps1` packaging script and `tools/verify.sh` structural checks.
+
+### Tooling
+
+- GitHub Actions workflow running `tools/verify.sh` on every push and pull
+  request, attaching a built zip to each run.
+
+### Fixed (pre-release, in tooling)
+
+- `tools/verify.sh` reported failures but exited 0. Its check loops ran in
+  subshells via pipes, so the failure flag never reached the parent shell - CI
+  would have passed on a broken pack. Rewritten to read from process
+  substitution.
+- The CRLF check used `grep -rl`, which under Git Bash flags every file
+  regardless of content. Replaced with a per-file check.
+- `build.ps1` wrote `pack.mcmeta` with `Set-Content`, emitting CRLF against the
+  repo's LF policy.

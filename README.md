@@ -1,5 +1,7 @@
 # Community Chunk Loader
 
+[![verify](https://github.com/wyzd0m/community-chunk-loader/actions/workflows/verify.yml/badge.svg)](https://github.com/wyzd0m/community-chunk-loader/actions/workflows/verify.yml)
+
 A server-only Minecraft **1.21.1** datapack that gives every player a small,
 bounded number of chunks that stay loaded while they are offline.
 
@@ -80,9 +82,16 @@ operation happens only when a player types a command.
 
 `bash tools/verify.sh` runs the structural checks - dangling function
 references, macro lines missing their leading `$`, macros called without
-arguments, JSON validity, and the 1.21 singular-directory layout. Run it before
-opening a PR. It catches most of what would otherwise only appear as red text
-in-game.
+arguments, JSON validity, CRLF line endings, and the 1.21 singular-directory
+layout. It catches most of what would otherwise only appear as red text in-game,
+or as nothing at all.
+
+CI runs the same script on every push and pull request, and attaches a built zip
+to each run so testers can grab an installable pack without a local PowerShell
+build.
+
+Run the script locally before opening a PR - it is the same command, so a green
+local run means a green CI run.
 
 ## License
 
