@@ -10,11 +10,26 @@ accounts AFK overnight so their farms would keep producing for the server
 economy. This replaces that workaround with something the server owner can
 measure and cap.
 
+Players only need to remember one command:
+
 ```text
-/trigger cl_add set 1       claim the chunk you are standing in
-/trigger cl_remove set 1    release your claim on this chunk
-/trigger cl_list set 1      see your claims and slot usage
+/trigger cl_list set 1
 ```
+
+...which prints their chunks as a clickable menu:
+
+```text
+[ChunkLoader] Your chunks: 2 / 4 slots used
+  1. Overworld  chunk X 12, Z -4    [free]
+  2. Nether     chunk X 25, Z 8     [free]
+
+  [+ Claim the chunk I am standing in]
+```
+
+`[free]` releases that claim from anywhere in the world. The green button claims
+the chunk the player is standing in. Both have typed equivalents
+(`/trigger cl_add set 1`, `/trigger cl_remove set 1`) for anyone who prefers
+them - see [docs/COMMANDS.md](docs/COMMANDS.md).
 
 - **No client mods.** Players install nothing.
 - **No OP required.** Ordinary players manage their own chunks.

@@ -141,3 +141,39 @@ Follow this order, and re-measure between steps:
 
 Lowering the limit is deliberately the first response. Adding complexity to a
 system that is already too expensive rarely makes it cheaper.
+
+## Upgrading from an earlier build
+
+Drop the new zip over the old one and restart (or `/reload`). Claims are
+untouched - they live in command storage, not in the pack.
+
+Objectives are created once and recorded in `chunkloader:data setup_version`, so
+a world that already installed the pack will not re-run the initial setup. New
+objectives arrive through migrations instead, which run automatically on load.
+
+To confirm a migration applied:
+
+```text
+/data get storage chunkloader:data setup_version
+```
+
+| Version | Introduced |
+| --- | --- |
+| 1 | initial release |
+| 2 | `cl_slot` and `cl.gen`, backing the clickable menu |
+
+If that returns 1 after a reload, the migration did not run. Check the server
+console for errors from `chunkloader:load`.
+
+### Repairing missing objectives by hand
+
+If an objective was deleted manually, recreate just that one rather than
+re-running setup:
+
+```text
+/scoreboard objectives add cl_slot trigger
+```
+
+Do not clear `setup_version` to force setup to re-run - it would throw on every
+objective that still exists, and the errors would fill your console on each
+`/reload`.

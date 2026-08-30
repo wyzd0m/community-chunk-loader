@@ -37,3 +37,29 @@ for what still has to pass before this is tagged.
   regardless of content. Replaced with a per-file check.
 - `build.ps1` wrote `pack.mcmeta` with `Set-Content`, emitting CRLF against the
   repo's LF policy.
+
+## v1.1.0
+
+### Added
+
+- **Clickable menu.** `/trigger cl_list set 1` now prints each claim with a
+  `[free]` button and a `[+ Claim the chunk I am standing in]` button below.
+  Players need to remember one command instead of three.
+- **Release a claim from anywhere.** Previously a player had to travel to a
+  chunk to give up its slot. `[free]` works from any distance, via a new
+  click-only `cl_slot` trigger.
+- Buttons are only drawn when clicking them would succeed: the claim button is
+  replaced by an explanation when the player is at their limit or an admin has
+  paused new claims.
+- `setup_version` storage value plus a migration path, so servers that already
+  installed the pack pick up objectives added in later releases.
+
+### Fixed
+
+- Freeing a claim renumbers the rows below it, so a second click on the same
+  printed menu would have released a different chunk than the one clicked -
+  silently unloading a farm. Buttons now carry the menu generation alongside the
+  row number and refuse a stale click, reprinting the current list instead.
+- `tools/verify.sh` now parses every `tellraw` payload, macro placeholders
+  included. The clickable rows are hand-written JSON and are the easiest thing
+  here to break unnoticed.

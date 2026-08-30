@@ -47,9 +47,14 @@ open. If that command errors, the datapack did not load.
 1. Stand somewhere harmless.
 2. `/trigger cl_add set 1` - expect a green confirmation and `1 / 4 slots`.
 3. `/forceload query` - the chunk you are standing in should be listed.
-4. `/trigger cl_list set 1` - your claim should appear.
-5. `/trigger cl_remove set 1` - expect a green confirmation and `0 / 4 slots`.
+4. `/trigger cl_list set 1` - your claim should appear, with a `[free]` button
+   beside it and a green claim button underneath.
+5. Click `[free]` - expect `Freed Overworld chunk X ..., Z ...` and `0 / 4 slots`.
 6. `/forceload query` - the chunk should be gone.
+
+If step 5 prints nothing at all, the `cl_slot` objective is missing. On a server
+that installed an earlier build, that means the v2 migration did not run - see
+[ADMIN.md](ADMIN.md#upgrading-from-an-earlier-build).
 
 ## Uninstall
 

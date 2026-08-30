@@ -1,4 +1,4 @@
-# One-time objective creation.
+# One-time objective creation for a FRESH install.
 #
 # Guarded by storage rather than run every load: "scoreboard objectives add" on
 # an existing objective throws, and a function-level throw is logged to the
@@ -6,9 +6,10 @@
 # single /reload, which is exactly the noise that teaches an admin to ignore
 # their console.
 #
-# To force this to run again (e.g. an objective was deleted by hand):
-#   /data remove storage chunkloader:data setup_done
-#   /reload
+# Adding an objective in a later release? Do NOT just add it here - existing
+# worlds have already run this function and will never run it again. Add a
+# migrate/vN function and bump setup_version, or the new objective simply will
+# not exist on any server that already installed the pack.
 
 scoreboard objectives add cl.tmp dummy
 scoreboard objectives add cl.cfg dummy
@@ -16,5 +17,7 @@ scoreboard objectives add cl.init dummy
 scoreboard objectives add cl_add trigger
 scoreboard objectives add cl_remove trigger
 scoreboard objectives add cl_list trigger
+scoreboard objectives add cl_slot trigger
+scoreboard objectives add cl.gen dummy
 
-data modify storage chunkloader:data setup_done set value 1b
+data modify storage chunkloader:data setup_version set value 2

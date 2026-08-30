@@ -3,3 +3,4 @@ scoreboard players set @s cl.init 1
 function chunkloader:util/reset_add
 function chunkloader:util/reset_remove
 function chunkloader:util/reset_list
+function chunkloader:util/reset_slot

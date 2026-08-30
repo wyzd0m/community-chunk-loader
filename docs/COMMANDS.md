@@ -1,11 +1,39 @@
 # Player commands
 
-Three commands. No permissions needed, no mods to install.
+No permissions needed, no mods to install.
 
 Datapacks cannot add new slash commands, so everything runs through vanilla's
 `/trigger`. The wording is fixed - `set 1` is part of the command.
 
-## Claim the chunk you are standing in
+## The only one worth memorising
+
+```text
+/trigger cl_list set 1
+```
+
+This prints your chunks as a **clickable menu**:
+
+```text
+[ChunkLoader] Your chunks: 2 / 4 slots used
+  1. Overworld  chunk X 12, Z -4    [free]
+  2. Nether     chunk X 25, Z 8     [free]
+
+  [+ Claim the chunk I am standing in]
+```
+
+Click `[free]` on any row to release that claim - from anywhere in the world, no
+travelling required. Click the green button to claim the chunk you are currently
+standing in. Hovering over a row shows its corner block coordinates.
+
+If you are out of slots, or an admin has paused new claims, the claim button is
+replaced by a line telling you why. A button is never shown when clicking it
+would fail.
+
+## Typed equivalents
+
+The buttons run these for you. Use them directly if you prefer typing.
+
+### Claim the chunk you are standing in
 
 ```text
 /trigger cl_add set 1
@@ -21,7 +49,7 @@ You will be refused if:
 - an admin has paused new claims;
 - you are in a dimension that is not open for claims.
 
-## Release a claim
+### Release the claim you are standing in
 
 ```text
 /trigger cl_remove set 1
@@ -33,20 +61,21 @@ you can go claim somewhere else straight away.
 If another player also claimed the same chunk, it stays loaded for them. You only
 give up your own hold on it.
 
-## See your claims
+## Why a stale menu refuses to act
+
+Freeing a claim renumbers the rows below it. If you free row 1 and then click
+`[free]` on row 2 of the *same* printout, row 2 no longer means what it did when
+the menu was drawn.
+
+Rather than release the wrong chunk, the datapack refuses:
 
 ```text
-/trigger cl_list set 1
+[ChunkLoader] That list was out of date, so nothing was changed. Here is the
+current one:
 ```
 
-Prints your slot usage and every chunk you own:
-
-```text
-[ChunkLoader] Your chunks: 3 / 4 slots used
-  1. Overworld  chunk X 12, Z -4
-  2. Overworld  chunk X 13, Z -4
-  3. Nether  chunk X 25, Z 8
-```
+...followed by a fresh menu. Click from the newest printout and this never comes
+up. It exists so that a mis-click can never silently unload someone's farm.
 
 ## Finding out which chunk you are in
 

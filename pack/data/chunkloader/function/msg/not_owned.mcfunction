@@ -1,1 +1,2 @@
-tellraw @s [{"text":"[ChunkLoader] ","color":"aqua"},{"text":"You do not have a claim on this chunk. Stand inside a chunk you claimed, or check ","color":"red"},{"text":"/trigger cl_list set 1","color":"gold"},{"text":".","color":"red"}]
+tellraw @s [{"text":"[ChunkLoader] ","color":"aqua"},{"text":"You do not have a claim on this chunk.","color":"red"}]
+tellraw @s [{"text":"  "},{"text":"[Show my chunks]","color":"gold","clickEvent":{"action":"run_command","value":"/trigger cl_list set 1"},"hoverEvent":{"action":"show_text","contents":[{"text":"Free any claim from anywhere, without travelling to it","color":"gray"}]}}]

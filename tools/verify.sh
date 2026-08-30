@@ -50,6 +50,28 @@ else
   say "  (node not found, skipping)"
 fi
 
+say "== tellraw component JSON =="
+# The clickable menu rows are hand-written JSON inside macro lines, which is the
+# easiest thing in this pack to break and the hardest to spot by eye. Macro
+# placeholders are replaced with representative values before parsing, so a
+# stray comma or unbalanced brace fails here rather than in chat.
+if command -v node >/dev/null 2>&1; then
+  while IFS= read -r line; do
+    [ -n "$line" ] || continue
+    json="${line#tellraw @s }"
+    sub=$(printf '%s' "$json" | sed \
+      -e 's/\$(n)/3/g'    -e 's/\$(k)/303/g' \
+      -e 's/\$(cx)/-4/g'  -e 's/\$(cz)/12/g' \
+      -e 's/\$(bx)/-64/g' -e 's/\$(bz)/192/g' \
+      -e 's/\$(dname)/Overworld/g' -e 's/\$(dim)/minecraft:overworld/g' \
+      -e 's/\$(owner)/[I;1,2,3,4]/g')
+    node -e "JSON.parse(process.argv[1])" "$sub" 2>/dev/null \
+      || bad "malformed tellraw JSON: $(printf '%.90s' "$json")..."
+  done < <(grep -rhoE 'tellraw @s \[.*\]$' "$FN" | sort -u)
+else
+  say "  (node not found, skipping)"
+fi
+
 say "== pack_format =="
 grep -q '"pack_format": *48' "$ROOT/pack/pack.mcmeta" || bad "pack_format should be 48 for Minecraft 1.21.1"
 
