@@ -1,2 +1,2 @@
-scoreboard players set @s cl_add 0
-scoreboard players enable @s cl_add
+scoreboard players set @s chunkadd 0
+scoreboard players enable @s chunkadd

@@ -13,7 +13,7 @@
 2. Upload it to your world's datapack folder:
 
    ```text
-   <server root>/<world name>/datapacks/community-chunk-loader-v1.0.0.zip
+   <server root>/<world name>/datapacks/community-chunk-loader-v1.2.0.zip
    ```
 
    On PebbleHost this is usually `world/datapacks/`. If your server splits
@@ -45,15 +45,15 @@ open. If that command errors, the datapack did not load.
 ## First smoke test
 
 1. Stand somewhere harmless.
-2. `/trigger cl_add set 1` - expect a green confirmation and `1 / 4 slots`.
+2. `/trigger chunkadd set 1` - expect a green confirmation and `1 / 4 slots`.
 3. `/forceload query` - the chunk you are standing in should be listed.
-4. `/trigger cl_list set 1` - your claim should appear, with a `[free]` button
+4. `/trigger chunks set 1` - your claim should appear, with a `[free]` button
    beside it and a green claim button underneath.
 5. Click `[free]` - expect `Freed Overworld chunk X ..., Z ...` and `0 / 4 slots`.
 6. `/forceload query` - the chunk should be gone.
 
-If step 5 prints nothing at all, the `cl_slot` objective is missing. On a server
-that installed an earlier build, that means the v2 migration did not run - see
+If step 5 prints nothing at all, the `chunkslot` objective is missing. On a server
+that installed an earlier build, that means the v3 migration did not run - see
 [ADMIN.md](ADMIN.md#upgrading-from-an-earlier-build).
 
 ## Uninstall
@@ -72,5 +72,5 @@ to clean them up manually with `/forceload remove`.
 - `/forceload` chunks are fully ticked, which is what Create kinetics and
   processing need. This is not the same as a "lazy" chunk.
 - Modded dimensions are not claimable. The datapack recognises the three vanilla
-  dimensions only; anywhere else, `cl_add` refuses with a clear message rather
+  dimensions only; anywhere else, `chunkadd` refuses with a clear message rather
   than storing something it cannot reload later.

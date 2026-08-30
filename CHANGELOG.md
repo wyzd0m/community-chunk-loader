@@ -63,3 +63,37 @@ for what still has to pass before this is tagged.
 - `tools/verify.sh` now parses every `tellraw` payload, macro placeholders
   included. The clickable rows are hand-written JSON and are the easiest thing
   here to break unnoticed.
+
+## v1.2.0
+
+### Changed
+
+- **Player triggers renamed** so the menu is the thing worth remembering:
+
+  | Before | Now |
+  | --- | --- |
+  | `cl_list` | `chunks` |
+  | `cl_add` | `chunkadd` |
+  | `cl_remove` | `chunkfree` |
+  | `cl_slot` | `chunkslot` |
+
+  `/trigger chunks set 1` is now the single command a player needs; everything
+  else is reachable from the menu it prints. Typing `/trigger ` and pressing Tab
+  lists the set, so the feature is discoverable without documentation.
+
+  Existing installs are migrated on load (`setup_version` 3): the new objectives
+  are created and the old ones removed, so tab-completion shows one coherent set
+  rather than two.
+
+- Freeing a claim from the menu now reprints the menu, so the next click is
+  always against current numbering and the stale-key path became a corner case
+  instead of routine.
+- Add and remove confirmations carry a `[my chunks]` button back into the menu.
+
+### Tooling
+
+- `verify.sh` fails on an objective that is used but never created in
+  `setup.mcfunction` - the exact bug that would have shipped dead `[free]`
+  buttons to every existing install.
+- `verify.sh` checks the migration chain: every `migrate/vN` is called from
+  `load`, sets its own version, and `setup.mcfunction` seeds the newest.

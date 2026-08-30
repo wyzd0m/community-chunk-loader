@@ -1,12 +1,12 @@
-# /trigger cl_slot set <key>
+# /trigger chunkslot set <key>
 # Frees one of the player's claims from anywhere in the world.
 #
-# Reachable only by clicking [free] in the /trigger cl_list menu, so players
+# Reachable only by clicking [free] in the /trigger chunks menu, so players
 # never have to know this trigger exists. The key packs the menu generation and
 # the row number together: key = generation * 100 + row.
 #
 # The score is read BEFORE the reset, since the reset zeroes it.
-execute store result score #key cl.tmp run scoreboard players get @s cl_slot
+execute store result score #key cl.tmp run scoreboard players get @s chunkslot
 function chunkloader:util/reset_slot
 
 scoreboard players operation #gen_in cl.tmp = #key cl.tmp
@@ -32,3 +32,4 @@ execute unless data storage chunkloader:tmp target run return run function chunk
 function chunkloader:internal/remove_apply with storage chunkloader:tmp target
 function chunkloader:util/count_owned
 function chunkloader:internal/slot_confirm with storage chunkloader:tmp target
+function chunkloader:trigger/list

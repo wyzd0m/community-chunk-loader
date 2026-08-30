@@ -14,10 +14,10 @@
 scoreboard objectives add cl.tmp dummy
 scoreboard objectives add cl.cfg dummy
 scoreboard objectives add cl.init dummy
-scoreboard objectives add cl_add trigger
-scoreboard objectives add cl_remove trigger
-scoreboard objectives add cl_list trigger
-scoreboard objectives add cl_slot trigger
+scoreboard objectives add chunkadd trigger
+scoreboard objectives add chunkfree trigger
+scoreboard objectives add chunks trigger
+scoreboard objectives add chunkslot trigger
 scoreboard objectives add cl.gen dummy
 
-data modify storage chunkloader:data setup_version set value 2
+data modify storage chunkloader:data setup_version set value 3

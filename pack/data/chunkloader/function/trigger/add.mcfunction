@@ -1,4 +1,4 @@
-# /trigger cl_add set 1
+# /trigger chunkadd set 1
 # Claims the chunk the player is currently standing in.
 function chunkloader:util/reset_add
 

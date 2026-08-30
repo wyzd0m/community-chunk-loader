@@ -13,7 +13,7 @@ measure and cap.
 Players only need to remember one command:
 
 ```text
-/trigger cl_list set 1
+/trigger chunks set 1
 ```
 
 ...which prints their chunks as a clickable menu:
@@ -28,7 +28,7 @@ Players only need to remember one command:
 
 `[free]` releases that claim from anywhere in the world. The green button claims
 the chunk the player is standing in. Both have typed equivalents
-(`/trigger cl_add set 1`, `/trigger cl_remove set 1`) for anyone who prefers
+(`/trigger chunkadd set 1`, `/trigger chunkfree set 1`) for anyone who prefers
 them - see [docs/COMMANDS.md](docs/COMMANDS.md).
 
 - **No client mods.** Players install nothing.
@@ -41,9 +41,10 @@ them - see [docs/COMMANDS.md](docs/COMMANDS.md).
 
 ## Status
 
-**v1.0.0 is written and structurally verified, but has not yet completed the
-live-server pilot.** The functional, persistence, Create-farm, and performance
-tests in [`TEST_PLAN.md`](TEST_PLAN.md) are the gate for tagging a release.
+**v1.2.0 is written and structurally verified, and the core commands have been
+confirmed working in game. It has not yet completed the live-server pilot.**
+
+The functional, persistence, Create-farm, and performance tests in [`TEST_PLAN.md`](TEST_PLAN.md) are the gate for tagging a release.
 Treat this as ready-to-test, not battle-tested.
 
 ## Install
@@ -55,14 +56,14 @@ verification, and uninstall are in [`docs/INSTALL.md`](docs/INSTALL.md).
 .\build.ps1
 ```
 
-Builds `dist/community-chunk-loader-v1.0.0.zip` from `pack/`.
+Builds `dist/community-chunk-loader-v1.2.0.zip` from `pack/`.
 
 ## Documentation
 
 | Document | What it covers |
 |---|---|
 | [`docs/INSTALL.md`](docs/INSTALL.md) | Installing, verifying, uninstalling |
-| [`docs/COMMANDS.md`](docs/COMMANDS.md) | The three player commands |
+| [`docs/COMMANDS.md`](docs/COMMANDS.md) | The chunk menu and typed commands |
 | [`docs/ADMIN.md`](docs/ADMIN.md) | Admin functions, tuning, recovery |
 | [`ARCHITECTURE.md`](ARCHITECTURE.md) | How it works and why it is built this way |
 | [`REQUIREMENTS.md`](REQUIREMENTS.md) | User stories, rules, definition of done |

@@ -2,7 +2,7 @@
 
 **Purpose:** source of truth for resuming this project in a fresh Claude Code/chat session.
 
-**Project stage:** **v1.0.0 implemented, not yet piloted.** The datapack in
+**Project stage:** **v1.2.0 implemented, commands confirmed in game, not yet piloted.** The datapack in
 `pack/` is complete and passes `tools/verify.sh`. Nothing has been run inside
 Minecraft yet. The next action is in-game testing, not more code.
 
@@ -39,9 +39,9 @@ Farms such as iron and andesite production supply stock for a player-run shop ec
 ## 3. Player UX (implemented)
 
 ```text
-/trigger cl_add set 1
-/trigger cl_remove set 1
-/trigger cl_list set 1
+/trigger chunkadd set 1
+/trigger chunkfree set 1
+/trigger chunks set 1
 ```
 
 Add/remove act on the player's **current chunk**.
@@ -118,7 +118,7 @@ A successful v1 must prove:
 3. **Live server, controlled pilot.** 2-3 Create players, real farms, the
    persistence and performance sections of `TEST_PLAN.md`.
 4. Collect the pilot questionnaire in `TEST_PLAN.md` §8.
-5. Tag `v1.0.0` and attach the built zip to a GitHub release.
+5. Tag `v1.2.0` and attach the built zip to a GitHub release.
 
 ## 8. Case-study goal
 

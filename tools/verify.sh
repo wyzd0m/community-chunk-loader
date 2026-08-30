@@ -50,6 +50,38 @@ else
   say "  (node not found, skipping)"
 fi
 
+say "== scoreboard objectives are declared =="
+# An objective used but never created silently does nothing: selectors just
+# never match, so the feature is dead with no error anywhere. migrate/ is
+# excluded - those deliberately name objectives from older releases.
+declared=$(grep -ohE '^scoreboard objectives add [A-Za-z0-9_.]+' "$FN/setup.mcfunction" | awk '{print $4}' | sort -u)
+used=$( { grep -rhoE 'scores=\{[A-Za-z0-9_.]+=' "$FN" --exclude-dir=migrate | sed 's/scores={//; s/=$//'
+         grep -rhoE '"objective":"[A-Za-z0-9_.]+"' "$FN" --exclude-dir=migrate | sed 's/.*:"//; s/"//'
+         grep -rhoE 'scoreboard players (set|add|remove|enable|get|reset|operation) [^ ]+ [A-Za-z0-9_.]+' "$FN" --exclude-dir=migrate | awk '{print $5}'
+         grep -rhoE '(if|unless) score [^ ]+ [A-Za-z0-9_.]+' "$FN" --exclude-dir=migrate | awk '{print $4}'
+       } | sort -u)
+while read -r o; do
+  [ -n "$o" ] || continue
+  printf '%s\n' "$declared" | grep -qx "$o" || bad "objective '$o' is used but never created in setup.mcfunction"
+done < <(printf '%s\n' "$used")
+
+say "== migration chain =="
+# Catches the two ways this goes wrong: a migration written but never called
+# from load, and setup.mcfunction seeding a version that skips past one.
+latest=$(find "$FN/migrate" -name 'v*.mcfunction' 2>/dev/null | sed 's/.*\/v//; s/\.mcfunction//' | sort -n | tail -1)
+if [ -n "${latest:-}" ]; then
+  grep -q "setup_version set value $latest\$" "$FN/setup.mcfunction" \
+    || bad "setup.mcfunction should seed setup_version $latest (the newest migration)"
+  v=2
+  while [ "$v" -le "$latest" ]; do
+    grep -q "{setup_version:$((v-1))} run function chunkloader:migrate/v$v" "$FN/load.mcfunction" \
+      || bad "load.mcfunction never calls migrate/v$v"
+    grep -q "setup_version set value $v\$" "$FN/migrate/v$v.mcfunction" \
+      || bad "migrate/v$v does not set setup_version to $v"
+    v=$((v+1))
+  done
+fi
+
 say "== tellraw component JSON =="
 # The clickable menu rows are hand-written JSON inside macro lines, which is the
 # easiest thing in this pack to break and the hardest to spot by eye. Macro

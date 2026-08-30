@@ -1,4 +1,4 @@
-# /trigger cl_remove set 1
+# /trigger chunkfree set 1
 # Releases this player's claim on the chunk they are standing in.
 # Intentionally NOT gated on #claims_enabled: players must always be able to
 # free a slot, even while an admin has new claims switched off.

@@ -9,6 +9,7 @@
 execute if data storage chunkloader:data setup_done unless data storage chunkloader:data setup_version run data modify storage chunkloader:data setup_version set value 1
 execute unless data storage chunkloader:data setup_version run function chunkloader:setup
 execute if data storage chunkloader:data {setup_version:1} run function chunkloader:migrate/v2
+execute if data storage chunkloader:data {setup_version:2} run function chunkloader:migrate/v3
 
 # --- constants ----------------------------------------------------------
 # Safe to re-set every load; setting an existing score never errors.

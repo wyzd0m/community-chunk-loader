@@ -47,8 +47,8 @@ claims.
 /function chunkloader:admin/enable_new_claims
 ```
 
-While disabled, `cl_add` refuses with an explanation. Existing claims stay loaded
-and `cl_remove` keeps working, so players can always shrink their footprint.
+While disabled, `chunkadd` refuses with an explanation. Existing claims stay loaded
+and `chunkfree` keeps working, so players can always shrink their footprint.
 
 ## Cleanup
 
@@ -160,7 +160,8 @@ To confirm a migration applied:
 | Version | Introduced |
 | --- | --- |
 | 1 | initial release |
-| 2 | `cl_slot` and `cl.gen`, backing the clickable menu |
+| 2 | `chunkslot` and `cl.gen`, backing the clickable menu |
+| 3 | triggers renamed to `chunks` / `chunkadd` / `chunkfree` / `chunkslot` |
 
 If that returns 1 after a reload, the migration did not run. Check the server
 console for errors from `chunkloader:load`.
@@ -171,7 +172,7 @@ If an objective was deleted manually, recreate just that one rather than
 re-running setup:
 
 ```text
-/scoreboard objectives add cl_slot trigger
+/scoreboard objectives add chunkslot trigger
 ```
 
 Do not clear `setup_version` to force setup to re-run - it would throw on every

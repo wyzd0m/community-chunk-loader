@@ -1,4 +1,4 @@
-# /trigger cl_list set 1
+# /trigger chunks set 1
 # Prints the player's claims as a clickable menu: a [free] button per row and
 # a claim button underneath. This is the only command a player needs to know.
 function chunkloader:util/reset_list

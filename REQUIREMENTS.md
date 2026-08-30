@@ -137,9 +137,9 @@ is in `ARCHITECTURE.md` section 12.
    block coordinates and macros cannot multiply.
 
 5. **Command UX** — the working names were kept as-is:
-   - `/trigger cl_add set 1`
-   - `/trigger cl_remove set 1`
-   - `/trigger cl_list set 1`
+   - `/trigger chunkadd set 1`
+   - `/trigger chunkfree set 1`
+   - `/trigger chunks set 1`
 
 ## 8. Definition of done
 

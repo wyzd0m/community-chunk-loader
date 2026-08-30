@@ -1,2 +1,2 @@
-scoreboard players set @s cl_slot 0
-scoreboard players enable @s cl_slot
+scoreboard players set @s chunkslot 0
+scoreboard players enable @s chunkslot

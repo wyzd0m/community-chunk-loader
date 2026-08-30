@@ -16,9 +16,9 @@ Datapacks cannot register new slash commands, so the interface is three
 scoreboard triggers:
 
 ```text
-/trigger cl_add set 1
-/trigger cl_remove set 1
-/trigger cl_list set 1
+/trigger chunkadd set 1
+/trigger chunkfree set 1
+/trigger chunks set 1
 ```
 
 This is also what makes the feature work without OP: `/forceload` needs
@@ -29,13 +29,13 @@ them. The player never touches `/forceload` directly.
 
 ```text
 execute as @a unless score @s cl.init matches 1 run function chunkloader:player/join
-execute as @a[scores={cl_add=1..}] at @s run function chunkloader:trigger/add
-execute as @a[scores={cl_remove=1..}] at @s run function chunkloader:trigger/remove
-execute as @a[scores={cl_list=1..}] run function chunkloader:trigger/list
+execute as @a[scores={chunkadd=1..}] at @s run function chunkloader:trigger/add
+execute as @a[scores={chunkfree=1..}] at @s run function chunkloader:trigger/remove
+execute as @a[scores={chunks=1..}] run function chunkloader:trigger/list
 ```
 
 plus three lines that swallow negative trigger values, because a player can type
-`/trigger cl_add set -5`. Each handler re-arms its own trigger as its first
+`/trigger chunkadd set -5`. Each handler re-arms its own trigger as its first
 action, so an error path can never leave a player locked out.
 
 ## 3. Persistent data model
@@ -206,7 +206,7 @@ start. There is no ticking entity, no chunk scan, and no repeated
 
 The list walks are recursive over a copy of the claim list. At the design target
 (~30 players x 4 slots = ~120 entries) this is far below any command-chain limit,
-and it only runs when someone types `cl_list` or `cl_add`.
+and it only runs when someone types `chunks` or `chunkadd`.
 
 ## 12. Resolved design questions
 

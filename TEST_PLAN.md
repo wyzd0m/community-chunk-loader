@@ -40,12 +40,12 @@ Then, in a disposable world:
 - [ ] `/function chunkloader:admin/status` prints without error.
       (If this errors, the pack did not load - check pack format and that the
       function directories are singular `function/`, not `functions/`.)
-- [ ] `/trigger cl_add set 1` at a **negative** coordinate (e.g. X -5, Z -5)
+- [ ] `/trigger chunkadd set 1` at a **negative** coordinate (e.g. X -5, Z -5)
       registers the correct chunk. This is the floor-vs-truncate trap; verify
       against F3's `Chunk:` line.
 - [ ] `/data get storage chunkloader:data claims` shows an entry whose `owner`
       is an int array.
-- [ ] **The load-bearing one:** claim a chunk, then `/trigger cl_add set 1` again
+- [ ] **The load-bearing one:** claim a chunk, then `/trigger chunkadd set 1` again
       in the same chunk. It must say "already claimed" rather than adding a
       second entry. That proves macro substitution of the UUID int array into an
       `if data` filter works. If this fails, stop and revisit

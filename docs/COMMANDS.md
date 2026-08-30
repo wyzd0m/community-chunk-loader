@@ -8,7 +8,7 @@ Datapacks cannot add new slash commands, so everything runs through vanilla's
 ## The only one worth memorising
 
 ```text
-/trigger cl_list set 1
+/trigger chunks set 1
 ```
 
 This prints your chunks as a **clickable menu**:
@@ -36,7 +36,7 @@ The buttons run these for you. Use them directly if you prefer typing.
 ### Claim the chunk you are standing in
 
 ```text
-/trigger cl_add set 1
+/trigger chunkadd set 1
 ```
 
 Stand anywhere inside the chunk you want kept loaded and run it. The chunk stays
@@ -52,7 +52,7 @@ You will be refused if:
 ### Release the claim you are standing in
 
 ```text
-/trigger cl_remove set 1
+/trigger chunkfree set 1
 ```
 
 Stand inside a chunk you claimed and run it. That frees the slot immediately, so

@@ -7,7 +7,7 @@
     .\build.ps1 -Version 1.1.0
 #>
 param(
-    [string]$Version = "1.0.0",
+    [string]$Version = "1.2.0",
     [string]$OutDir  = "dist"
 )
 
