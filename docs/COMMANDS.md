@@ -13,17 +13,15 @@ Datapacks cannot add new slash commands, so everything runs through vanilla's
 
 This prints your chunks as a **clickable menu**:
 
-```text
-[ChunkLoader] Your chunks: 2 / 4 slots used
-  1. Overworld  chunk X 12, Z -4    [free]
-  2. Nether     chunk X 25, Z 8     [free]
-
-  [+ Claim the chunk I am standing in]
-```
+![Chat showing two claimed Overworld chunks, each row ending in a red free button, with a green claim button below](images/chunk-menu.png)
 
 Click `[free]` on any row to release that claim - from anywhere in the world, no
 travelling required. Click the green button to claim the chunk you are currently
 standing in. Hovering over a row shows its corner block coordinates.
+
+Every button explains itself on hover:
+
+![Hovering the claim button shows a tooltip reading: Claims your current chunk. Stand inside the farm you want kept loaded first.](images/claim-button.png)
 
 If you are out of slots, or an admin has paused new claims, the claim button is
 replaced by a line telling you why. A button is never shown when clicking it

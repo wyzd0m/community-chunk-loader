@@ -210,3 +210,43 @@ Useful final measurements:
 - changes made because of player feedback.
 
 These are more valuable than code size for the final case study.
+
+---
+
+## 10. Results - v1.2.0, 2026-08-31
+
+Recorded against the live NeoForge / Create server, not a disposable world.
+
+### Confirmed working
+
+- **Commands and menu.** Claim, free, and list all behave as specified. The
+  clickable menu, the `[free]` buttons, and the hover tooltips work for non-OP
+  players. Slot accounting and the 4-chunk limit hold.
+- **Persistence across restart.** Claims survived a full server stop and start,
+  and the chunks came back force-loaded.
+- **Offline farm operation.** A Create farm kept processing with no player
+  nearby. This is the problem the project set out to solve, and it is solved.
+- **Multiple players.** Other members of the server ran the commands
+  successfully on the live server.
+
+### Not formally measured
+
+These are not known failures - they were simply never benchmarked, and the
+project shipped without them:
+
+- **Performance before/after.** No TPS or MSPT baseline was captured, so there
+  is no number to compare against as claim count grows. Section 6 was not run.
+  If lag reports appear, lower the per-player limit first
+  (`/function chunkloader:admin/set_limit {n:2}`) and re-check.
+- **Shared-chunk ownership.** Two players claiming the same chunk, and the
+  chunk staying loaded until the last owner releases it, was not exercised with
+  two real accounts. The logic is covered by the claim-list-as-refcount design
+  but has not been observed end to end.
+- **Admin recovery paths.** `clear_all`, `clear_here`, `clear_player`, and
+  `panic` were not run against real claim data.
+
+### Worth watching during normal use
+
+- Claim count growth. `/function chunkloader:admin/status` reports the total.
+- Whether four slots per player turns out to be the right number.
+- Whether anyone still feels the need to AFK overnight.

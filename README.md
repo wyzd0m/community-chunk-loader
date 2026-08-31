@@ -18,13 +18,7 @@ Players only need to remember one command:
 
 ...which prints their chunks as a clickable menu:
 
-```text
-[ChunkLoader] Your chunks: 2 / 4 slots used
-  1. Overworld  chunk X 12, Z -4    [free]
-  2. Nether     chunk X 25, Z 8     [free]
-
-  [+ Claim the chunk I am standing in]
-```
+![The chunk menu in game: two claimed Overworld chunks, each row ending in a red free button, with a green claim button underneath](docs/images/chunk-menu.png)
 
 `[free]` releases that claim from anywhere in the world. The green button claims
 the chunk the player is standing in. Both have typed equivalents
@@ -41,11 +35,14 @@ them - see [docs/COMMANDS.md](docs/COMMANDS.md).
 
 ## Status
 
-**v1.2.0 is written and structurally verified, and the core commands have been
-confirmed working in game. It has not yet completed the live-server pilot.**
+**v1.2.0 is released and running on the server it was built for.** Commands and
+menu, persistence across a full restart, and a Create farm processing with no
+player nearby have all been confirmed live, with other members of the server
+using it too.
 
-The functional, persistence, Create-farm, and performance tests in [`TEST_PLAN.md`](TEST_PLAN.md) are the gate for tagging a release.
-Treat this as ready-to-test, not battle-tested.
+Server performance was never formally benchmarked, and shared-chunk ownership
+and the admin recovery paths have not been exercised end to end. Those gaps are
+written up honestly in [`TEST_PLAN.md`](TEST_PLAN.md#10-results---v120-2026-08-31).
 
 ## Install
 
@@ -67,7 +64,7 @@ Builds `dist/community-chunk-loader-v1.2.0.zip` from `pack/`.
 | [`docs/ADMIN.md`](docs/ADMIN.md) | Admin functions, tuning, recovery |
 | [`ARCHITECTURE.md`](ARCHITECTURE.md) | How it works and why it is built this way |
 | [`REQUIREMENTS.md`](REQUIREMENTS.md) | User stories, rules, definition of done |
-| [`TEST_PLAN.md`](TEST_PLAN.md) | What has to pass before this is trusted |
+| [`TEST_PLAN.md`](TEST_PLAN.md) | Test plan, and what was actually verified |
 | [`HANDOFF.md`](HANDOFF.md) | Compact context for picking the project back up |
 
 ## How it works, briefly
@@ -84,8 +81,10 @@ asks "does any entry already exist for this chunk?" - if not, it calls
 entry, and only calls `/forceload remove` when the answer is no. There is no
 separate counter to drift out of sync.
 
-Per-tick cost is four score-filtered `@a` selectors and nothing else. Every real
-operation happens only when a player types a command.
+Per-tick cost is nine score-filtered `@a` selectors and nothing else - one to
+grant trigger access to new arrivals, and one dispatch plus one out-of-range
+reset per trigger. Every real operation happens only when a player runs a
+command or clicks a button.
 
 ## Compatibility
 

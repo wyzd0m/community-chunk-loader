@@ -2,7 +2,7 @@
 
 **Purpose:** source of truth for resuming this project in a fresh Claude Code/chat session.
 
-**Project stage:** **v1.2.0 implemented, commands confirmed in game, not yet piloted.** The datapack in
+**Project stage:** **v1.2.0 released and in live use.** Commands, restart persistence, and offline Create-farm operation confirmed on the live server; performance never benchmarked. See TEST_PLAN.md section 10. The datapack in
 `pack/` is complete and passes `tools/verify.sh`. Nothing has been run inside
 Minecraft yet. The next action is in-game testing, not more code.
 

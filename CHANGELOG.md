@@ -64,7 +64,7 @@ for what still has to pass before this is tagged.
   included. The clickable rows are hand-written JSON and are the easiest thing
   here to break unnoticed.
 
-## v1.2.0
+## v1.2.0 - 2026-08-31
 
 ### Changed
 
